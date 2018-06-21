@@ -11,6 +11,7 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'net.ltgt.apt' version '0.10'
 }
 
 group 'Coursera'
@@ -22,11 +23,20 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compileOnly 'org.projectlombok:lombok:1.18.0'
+    apt "org.projectlombok:lombok:1.18.0"
+
+    compile files('libs/courserajava.jar')
 }
 
 compileKotlin {
@@ -34,4 +44,12 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName="App"
+
+dependencies {
+    compile 'org.apache.commons:commons-csv:1.5'
 }
