@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class FirstRatings {
 
 
-    public ArrayList<Movie> loadMovies(String filename) {
+    public static ArrayList<Movie> loadMovies(String filename) {
         ArrayList<Movie> moviesList = new ArrayList<>();
 
         FileResource fileResource = new FileResource(filename);
@@ -35,25 +35,19 @@ public class FirstRatings {
             moviesList.add(m);
         }
 
-        System.out.println("Total movies in the file: " + moviesList.stream().count());
+        //System.out.println("Total movies in the file: " + moviesList.stream().count());
         //moviesList.stream().forEach(System.out::println);
 
         return moviesList;
     }
 
-    public ArrayList<Rater> loadRaters(String filename) {
+    public static ArrayList<Rater> loadRaters(String filename) {
         ArrayList<Rater> ratersList = new ArrayList<>();
 
         FileResource fileResource = new FileResource(filename);
 
         CSVParser parser = fileResource.getCSVParser();
 
-        /*
-        line.get("rater_id"),
-        line.get("movie_id"),
-        line.get("rating"),
-        line.get("time")
-         */
         for (CSVRecord line : parser) {
             Rater r = new Rater(line.get("rater_id"));
             if (!ratersList.stream().anyMatch(rater -> rater.getId().equals(line.get("rater_id")))) {
@@ -72,7 +66,7 @@ public class FirstRatings {
         }
 
 
-        System.out.println("Total raters in the file: " + ratersList.stream().count());
+        //System.out.println("Total raters in the file: " + ratersList.stream().count());
         //moviesList.stream().forEach(System.out::println);
 
         return ratersList;
