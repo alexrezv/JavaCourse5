@@ -51,13 +51,14 @@ public class RaterFiltersImpl implements RaterFilters {
     //Add code to determine how many different movies have been rated by all these raters. If you run this code on the
     //file ratings_short.csv, you will see there were four movies rated.
     public long howManyMoviesHaveBeenRated(ArrayList<Rater> ratersList) {
-        /*ArrayList<ArrayList<String>> listOfListsOfRatedMovies =
+        ArrayList<ArrayList<String>> listOfListsOfRatedMovies =
                 ratersList.stream().map(Rater::getItemsRated).collect(Collectors.toCollection(ArrayList::new));
-        ArrayList<String> allRatedMovies =
-                listOfListsOfRatedMovies.stream().collect(Collectors.toMap(a -> a.stream().toArray(value -> +1), ignore ->0))
-                        .keySet().stream().collect(Collectors.toList());*/
+        List<String> allRatedMovies = new ArrayList<>();
+        for (ArrayList<String> innerList : listOfListsOfRatedMovies) {
+            allRatedMovies.addAll(innerList);
+        }
 
-        return 0;
+        return allRatedMovies.stream().distinct().count();
     }
 
 
