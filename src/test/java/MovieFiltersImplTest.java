@@ -11,11 +11,12 @@ public class MovieFiltersImplTest {
 
     @Test
     public void testMovieFiltersImplHasOutput() {
-        MovieFiltersImpl classUnderTest = new MovieFiltersImpl();
+        ArrayList<Movie> moviesList =
+                FirstRatings.loadMovies(
+                        "/home/alex/Documents/Course5/src/main/java/Week1/data/ratedmoviesfull.csv");
 
-        FirstRatings fr = new FirstRatings();
-        ArrayList<Movie> list = fr.loadMovies("/home/alex/Documents/Course5/src/main/java/Week1/data/ratedmoviesfull.csv");
+        MovieFiltersImpl classUnderTest = new MovieFiltersImpl(moviesList);
 
-        assertNotNull(classUnderTest.howManyComedyMovies(list));
+        assertNotNull(classUnderTest.howManyComedyMovies());
     }
 }

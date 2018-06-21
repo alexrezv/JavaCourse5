@@ -1,5 +1,12 @@
 package Week2;
 
+import Week1.FirstRatings;
+import Week1.Movie;
+import Week1.Rater;
+import Week1.filters.RaterFiltersImpl;
+
+import java.util.ArrayList;
+
 /**
  * In this assignment you will modify a new class named SecondRatings, which has been started for you, to do many of the
  * calculations focusing on computing averages on movie ratings. You will also create a second new class named
@@ -9,14 +16,6 @@ package Week2;
  * @author alexrezv
  * @version 21.06.2018
  */
-
-import Week1.FirstRatings;
-import Week1.Movie;
-import Week1.Rater;
-import Week1.Rating;
-import Week1.filters.RaterFiltersImpl;
-
-import java.util.ArrayList;
 
 public class SecondRatings {
     private ArrayList<Movie> myMovies;
@@ -57,7 +56,7 @@ public class SecondRatings {
     private double getAverageRatingByID(String movieId, int minimalRaters) {
         double averageRating = 0.0;
 
-        RaterFiltersImpl rFilters = new RaterFiltersImpl();
+        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
 /*
         if (rFilters.howManyRatingsForAMovieById(myRaters,movieId) >= minimalRaters) {
             averageRating = myRaters.stream()
