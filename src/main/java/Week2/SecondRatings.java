@@ -3,6 +3,7 @@ package Week2;
 import Week1.FirstRatings;
 import Week1.Movie;
 import Week1.Rater;
+import Week1.Rating;
 import Week1.filters.RaterFiltersImpl;
 
 import java.util.ArrayList;
@@ -34,7 +35,9 @@ public class SecondRatings {
         myMovies = FirstRatings.loadMovies(movieFile);
         myRaters = FirstRatings.loadRaters(ratingsFile);
 
-        double avg = getAverageRatingByID("113277", 5);
+        //double avg = getAverageRatingByID("113277", 5);
+        RaterFiltersImpl filters = new RaterFiltersImpl(myRaters);
+        ArrayList<Rating> ratings = filters.getAverageRatings(3);
     }
 
     //In the SecondRatings class, write a public method named getMovieSize, which returns the number of movies that were
@@ -49,22 +52,5 @@ public class SecondRatings {
         return myRaters.size();
     }
 
-    //In the SecondRatings class, write a private helper method named getAverageByID that has two parameters: a String
-    // named id representing a movie ID and an integer named minimalRaters. This method returns a double representing
-    // the average movie rating for this ID if there are at least minimalRaters ratings. If there are not minimalRaters
-    // ratings, then it returns 0.0.
-    private double getAverageRatingByID(String movieId, int minimalRaters) {
-        double averageRating = 0.0;
 
-        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
-/*
-        if (rFilters.howManyRatingsForAMovieById(myRaters,movieId) >= minimalRaters) {
-            averageRating = myRaters.stream()
-                    .map(r -> r.getMyRatings().stream()
-                            .filter(rating -> rating.getItem().equals(movieId)).map(Rating::getItem))
-                    .;
-        }
-*/
-        return averageRating;
-    }
 }

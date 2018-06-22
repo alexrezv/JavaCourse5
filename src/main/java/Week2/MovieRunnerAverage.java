@@ -16,15 +16,16 @@ package Week2;
 public class MovieRunnerAverage {
 
     public static void printAverageRatings() {
-        String movieFile = "/home/alex/Documents/Course5/src/main/java/Week1/data/ratedmovies_short.csv";
-        //String movieFile = "/home/alex/Documents/Course5/src/main/java/Week1/data/ratedmoviesfull.csv";
+        String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
+        //String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
 
-        String ratingsFile = "/home/alex/Documents/Course5/src/main/java/Week1/data/ratings_short.csv";
-        //String ratingsFile = "/home/alex/Documents/Course5/src/main/java/Week1/data/ratings.csv";
+        String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
+        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
 
         SecondRatings secondRatings = new SecondRatings(movieFile, ratingsFile);
 
         System.out.println("Total movies: " + secondRatings.getMovieSize());
         System.out.println("Total raters: " + secondRatings.getRaterSize());
+
     }
 }

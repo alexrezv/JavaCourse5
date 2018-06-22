@@ -2,13 +2,13 @@ package Week1.filters;
 
 public interface RaterFilters {
 
-    long howManyRatingsForRaterById(String id);
+    long howManyRatingsByRaterId(String id);
 
     long maxRatingsByAnyRater();
 
     String getRatersWithNumOfRatings(int ratingsNum);
 
-    long howManyRatingsForAMovieById(String movieId);
+    long howManyRatingsByMovieId(String movieId);
 
     long howManyMoviesHaveBeenRated();
 }
