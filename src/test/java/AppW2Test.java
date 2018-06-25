@@ -2,10 +2,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class AppTest {
+public class AppW2Test {
     @Test
     public void testAppHasAGreeting() {
-        App classUnderTest = new App();
+        AppW2 classUnderTest = new AppW2();
         assertNotNull("app should have a greeting",
                 classUnderTest.getGreeting());
     }

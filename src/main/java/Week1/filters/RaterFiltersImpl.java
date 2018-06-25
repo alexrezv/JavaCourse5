@@ -124,4 +124,18 @@ public class RaterFiltersImpl implements RaterFilters {
         return avgRatingsList;
     }
 
+    public long countMoviesWithOrMoreRatings(int minRatingsCount) {
+        List<String> movieIdList = new ArrayList<>();
+
+        for (Rater r : ratersList) {
+            movieIdList.addAll(r.getItemsRated());
+        }
+        movieIdList = movieIdList.stream().distinct().collect(Collectors.toList());
+
+        Map<String, Long> moviesToNumRatings = movieIdList.stream()
+                .collect(Collectors.toMap(k -> k, this::howManyRatersRatedGivenMovie));
+
+        return moviesToNumRatings.entrySet().stream().filter(a -> a.getValue() >= minRatingsCount).count();
+    }
+
 }

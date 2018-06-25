@@ -6,6 +6,7 @@ import Week1.Rater;
 import Week1.Rating;
 import Week1.filters.MovieFiltersImpl;
 import Week1.filters.RaterFiltersImpl;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,9 +22,12 @@ import java.util.stream.Collectors;
  * @version 21.06.2018
  */
 
+@Getter
 public class SecondRatings {
     private ArrayList<Movie> myMovies;
     private ArrayList<Rater> myRaters;
+    private RaterFiltersImpl rFilters;
+    private MovieFiltersImpl mFilters;
 
     public SecondRatings() {
         // default constructor
@@ -37,6 +41,8 @@ public class SecondRatings {
     public SecondRatings(String movieFile, String ratingsFile) {
         myMovies = FirstRatings.loadMovies(movieFile);
         myRaters = FirstRatings.loadRaters(ratingsFile);
+        rFilters = new RaterFiltersImpl(myRaters);
+        mFilters = new MovieFiltersImpl(myMovies);
     }
 
     //In the SecondRatings class, write a public method named getMovieSize, which returns the number of movies that were
@@ -60,19 +66,17 @@ public class SecondRatings {
     //  8.25 Her
     //  9.0 The Godfather
     public void printAverageRatings() {
-        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
-        MovieFiltersImpl mFilters = new MovieFiltersImpl(myMovies);
-        ArrayList<Rating> ratings = rFilters.getAverageRatings(3);
+        ArrayList<Rating> ratings = rFilters.getAverageRatings(20);
         Map<String, Double> titleToAvg = ratings.stream()
                 .collect(Collectors.toMap(r -> mFilters.getTitleById(r.getItem()), Rating::getValue));
         MapUtil.sortByValue(titleToAvg).forEach((key, value) -> System.out.println(value + " \t" + key));
     }
 
     public double getAverageRatingByTitle(String movieTitle, int minimalRaters) {
-        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
-        MovieFiltersImpl mFilters = new MovieFiltersImpl(myMovies);
+
         String movieId = mFilters.getIdByTitle(movieTitle);
         return rFilters.getAverageRatingByMovieID(movieId, minimalRaters);
     }
+
 
 }

@@ -1,8 +1,8 @@
 import Week2.MovieRunnerAverage;
 
-public class App {
+public class AppW2 {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        System.out.println(new AppW2().getGreeting());
         MovieRunnerAverage.printAverageRatings();
         MovieRunnerAverage.getAverageRatingOneMovie();
     }

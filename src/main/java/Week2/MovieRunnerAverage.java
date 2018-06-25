@@ -16,11 +16,11 @@ package Week2;
 public class MovieRunnerAverage {
 
     public static void printAverageRatings() {
-        String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
-        //String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
+        //String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
+        String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
 
-        String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
-        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
+        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
+        String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
 
         SecondRatings secondRatings = new SecondRatings(movieFile, ratingsFile);
 
@@ -28,6 +28,8 @@ public class MovieRunnerAverage {
         System.out.println("Total raters: " + secondRatings.getRaterSize());
 
         secondRatings.printAverageRatings();
+
+        System.out.println("Movies with 50+ ratings: " + secondRatings.getRFilters().countMoviesWithOrMoreRatings(50));
     }
 
     //In the MovieRunnerAverage class, write the void method getAverageRatingOneMovie, which has no parameters.
@@ -36,16 +38,22 @@ public class MovieRunnerAverage {
     // “The Godfather”. If the moviefile is set to the file named ratedmovies_short.csv, and the ratingsfile is set
     // to the file ratings_short.csv, then the average for the movie “The Godfather” would be 9.0.
     public static void getAverageRatingOneMovie() {
-        String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
-        //String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
+        //String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
+        String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
 
-        String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
-        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
+        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
+        String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
 
         SecondRatings secondRatings = new SecondRatings(movieFile, ratingsFile);
 
-        System.out.println("Avg rating for \"The Godfather\" is "
-                + secondRatings.getAverageRatingByTitle("The Godfather", 3));
+        System.out.println("Avg rating for \"The Maze Runner\" is "
+                + secondRatings.getAverageRatingByTitle("The Maze Runner", 3));
+
+        System.out.println("Avg rating for \"Moneyball\" is "
+                + secondRatings.getAverageRatingByTitle("Moneyball", 3));
+
+        System.out.println("Avg rating for \"Vacation\" is "
+                + secondRatings.getAverageRatingByTitle("Vacation", 3));
 
     }
 
