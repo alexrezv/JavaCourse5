@@ -4,9 +4,12 @@ import Week1.FirstRatings;
 import Week1.Movie;
 import Week1.Rater;
 import Week1.Rating;
+import Week1.filters.MovieFiltersImpl;
 import Week1.filters.RaterFiltersImpl;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * In this assignment you will modify a new class named SecondRatings, which has been started for you, to do many of the
@@ -34,23 +37,42 @@ public class SecondRatings {
     public SecondRatings(String movieFile, String ratingsFile) {
         myMovies = FirstRatings.loadMovies(movieFile);
         myRaters = FirstRatings.loadRaters(ratingsFile);
-
-        //double avg = getAverageRatingByID("113277", 5);
-        RaterFiltersImpl filters = new RaterFiltersImpl(myRaters);
-        ArrayList<Rating> ratings = filters.getAverageRatings(3);
     }
 
     //In the SecondRatings class, write a public method named getMovieSize, which returns the number of movies that were
     // read in and stored in the ArrayList of type Movie.
-    public int getMovieSize() {
+    int getMovieSize() {
         return myMovies.size();
     }
 
     //In the SecondRatings class, write a public method named getRaterSize, which returns the number of raters that were
     // read in and stored in the ArrayList of type Rater.
-    public int getRaterSize() {
+    int getRaterSize() {
         return myRaters.size();
     }
 
+    //In the MovieRunnerAverage class in the printAverageRatings method, add code to print a list of movies and their
+    // average ratings, for all those movies that have at least a specified number of ratings, sorted by averages.
+    // Specifically, this method should print the list of movies, one movie per line (print its rating first, followed
+    // by its title) in sorted order by ratings, lowest rating to highest rating. For example, if printAverageRatings is
+    // called on the files ratings_short.csv and ratedmovies_short.csv with the argument 3, then the output will display
+    // two movies:
+    //  8.25 Her
+    //  9.0 The Godfather
+    public void printAverageRatings() {
+        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
+        MovieFiltersImpl mFilters = new MovieFiltersImpl(myMovies);
+        ArrayList<Rating> ratings = rFilters.getAverageRatings(3);
+        Map<String, Double> titleToAvg = ratings.stream()
+                .collect(Collectors.toMap(r -> mFilters.getTitleById(r.getItem()), Rating::getValue));
+        MapUtil.sortByValue(titleToAvg).forEach((key, value) -> System.out.println(value + " \t" + key));
+    }
+
+    public double getAverageRatingByTitle(String movieTitle, int minimalRaters) {
+        RaterFiltersImpl rFilters = new RaterFiltersImpl(myRaters);
+        MovieFiltersImpl mFilters = new MovieFiltersImpl(myMovies);
+        String movieId = mFilters.getIdByTitle(movieTitle);
+        return rFilters.getAverageRatingByMovieID(movieId, minimalRaters);
+    }
 
 }

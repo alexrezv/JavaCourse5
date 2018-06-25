@@ -53,4 +53,32 @@ public class MovieFiltersImpl implements MovieFilters {
 
         return directors.toString();
     }
+
+    //In the SecondRatings class, write a method named getTitle that has one String parameter named id, representing the
+    // ID of a movie. This method returns the title of the movie with that ID. If the movie ID does not exist, then this
+    // method should return a String indicating the ID was not found.
+    public String getTitleById(String movieId) {
+        Movie mv = moviesList.stream().
+                filter(m -> Long.parseLong(m.getId()) == Long.parseLong(movieId))
+                .findFirst().orElse(null);
+        if (mv != null) {
+            return mv.getTitle();
+        }
+        return "No title found by the given ID(" + movieId + ")!";
+    }
+
+    //In the SecondRatings class, write a method getID that has one String parameter named title representing the title
+    // of a movie. This method returns the movie ID of this movie. If the title is not found, return an appropriate
+    // message such as “NO SUCH TITLE.” Note that the movie title must be spelled exactly as it appears in the movie
+    // data files.
+    public String getIdByTitle(String movieTitle) {
+        Movie mv = moviesList.stream().
+                filter(m -> m.getTitle().equals(movieTitle))
+                .findFirst().orElse(null);
+        if (mv != null) {
+            Long id = Long.parseLong(mv.getId());
+            return id.toString();
+        }
+        return "No ID found for \"" + movieTitle + "\"";
+    }
 }

@@ -22,8 +22,9 @@ public class FirstRatings {
         CSVParser parser = fileResource.getCSVParser();
 
         for (CSVRecord line : parser) {
+            Long movieId = Long.parseLong(line.get("id"));
             Movie m = new Movie(
-                    line.get("id"),
+                    movieId.toString(),
                     line.get("title"),
                     line.get("year"),
                     line.get("genre"),
@@ -57,10 +58,10 @@ public class FirstRatings {
 
         parser = fileResource.getCSVParser();
         for (CSVRecord line : parser) {
-            ratersList.stream()
-                    .forEach(r -> {
+            ratersList.forEach(r -> {
                         if (r.getId().equals(line.get("rater_id"))) {
-                            r.addRating(line.get("movie_id"), Double.parseDouble(line.get("rating")));
+                            Long movieId = Long.parseLong(line.get("movie_id"));
+                            r.addRating(movieId.toString(), Double.parseDouble(line.get("rating")));
                         }
                     });
         }

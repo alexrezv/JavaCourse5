@@ -27,5 +27,26 @@ public class MovieRunnerAverage {
         System.out.println("Total movies: " + secondRatings.getMovieSize());
         System.out.println("Total raters: " + secondRatings.getRaterSize());
 
+        secondRatings.printAverageRatings();
     }
+
+    //In the MovieRunnerAverage class, write the void method getAverageRatingOneMovie, which has no parameters.
+    //This method should first create a SecondRatings object, reading in data from the movie and ratings data files.
+    // Then this method should print out the average ratings for a specific movie title, such as the movie
+    // “The Godfather”. If the moviefile is set to the file named ratedmovies_short.csv, and the ratingsfile is set
+    // to the file ratings_short.csv, then the average for the movie “The Godfather” would be 9.0.
+    public static void getAverageRatingOneMovie() {
+        String movieFile = "/home/alex/Documents/Course5/data/ratedmovies_short.csv";
+        //String movieFile = "/home/alex/Documents/Course5/data/ratedmoviesfull.csv";
+
+        String ratingsFile = "/home/alex/Documents/Course5/data/ratings_short.csv";
+        //String ratingsFile = "/home/alex/Documents/Course5/data/ratings.csv";
+
+        SecondRatings secondRatings = new SecondRatings(movieFile, ratingsFile);
+
+        System.out.println("Avg rating for \"The Godfather\" is "
+                + secondRatings.getAverageRatingByTitle("The Godfather", 3));
+
+    }
+
 }
