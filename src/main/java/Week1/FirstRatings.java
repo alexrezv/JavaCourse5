@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class FirstRatings {
 
 
-    public ArrayList<Movie> loadMovies(String filename) {
+    public static ArrayList<Movie> loadMovies(String filename) {
         ArrayList<Movie> moviesList = new ArrayList<>();
 
         FileResource fileResource = new FileResource(filename);
@@ -22,8 +22,9 @@ public class FirstRatings {
         CSVParser parser = fileResource.getCSVParser();
 
         for (CSVRecord line : parser) {
+            Long movieId = Long.parseLong(line.get("id"));
             Movie m = new Movie(
-                    line.get("id"),
+                    movieId.toString(),
                     line.get("title"),
                     line.get("year"),
                     line.get("genre"),
@@ -35,25 +36,19 @@ public class FirstRatings {
             moviesList.add(m);
         }
 
-        System.out.println("Total movies in the file: " + moviesList.stream().count());
+        //System.out.println("Total movies in the file: " + moviesList.stream().count());
         //moviesList.stream().forEach(System.out::println);
 
         return moviesList;
     }
 
-    public ArrayList<Rater> loadRaters(String filename) {
+    public static ArrayList<Rater> loadRaters(String filename) {
         ArrayList<Rater> ratersList = new ArrayList<>();
 
         FileResource fileResource = new FileResource(filename);
 
         CSVParser parser = fileResource.getCSVParser();
 
-        /*
-        line.get("rater_id"),
-        line.get("movie_id"),
-        line.get("rating"),
-        line.get("time")
-         */
         for (CSVRecord line : parser) {
             Rater r = new Rater(line.get("rater_id"));
             if (!ratersList.stream().anyMatch(rater -> rater.getId().equals(line.get("rater_id")))) {
@@ -63,16 +58,16 @@ public class FirstRatings {
 
         parser = fileResource.getCSVParser();
         for (CSVRecord line : parser) {
-            ratersList.stream()
-                    .forEach(r -> {
+            ratersList.forEach(r -> {
                         if (r.getId().equals(line.get("rater_id"))) {
-                            r.addRating(line.get("movie_id"), Double.parseDouble(line.get("rating")));
+                            Long movieId = Long.parseLong(line.get("movie_id"));
+                            r.addRating(movieId.toString(), Double.parseDouble(line.get("rating")));
                         }
                     });
         }
 
 
-        System.out.println("Total raters in the file: " + ratersList.stream().count());
+        //System.out.println("Total raters in the file: " + ratersList.stream().count());
         //moviesList.stream().forEach(System.out::println);
 
         return ratersList;

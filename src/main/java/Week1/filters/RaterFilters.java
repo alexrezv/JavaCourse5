@@ -1,18 +1,14 @@
 package Week1.filters;
 
-import Week1.Rater;
-
-import java.util.ArrayList;
-
 public interface RaterFilters {
 
-    long howManyRatingsForRaterById(ArrayList<Rater> list, String id);
+    long howManyRatingsByRaterId(String id);
 
-    long maxRatingsByAnyRater(ArrayList<Rater> list);
+    long maxRatingsByAnyRater();
 
-    String getRatersWithNumOfRatings(ArrayList<Rater> raters, int ratingsNum);
+    String getRatersWithNumOfRatings(int ratingsNum);
 
-    long howManyRatingsForAMovieById(ArrayList<Rater> raterList, String movieId);
+    long howManyRatingsByMovieId(String movieId);
 
-    long howManyMoviesHaveBeenRated(ArrayList<Rater> ratersList);
+    long howManyMoviesHaveBeenRated();
 }
