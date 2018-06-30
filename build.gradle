@@ -48,7 +48,7 @@ compileTestKotlin {
 
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName="App"
+mainClassName="AppW3"
 
 dependencies {
     compile 'org.apache.commons:commons-csv:1.5'

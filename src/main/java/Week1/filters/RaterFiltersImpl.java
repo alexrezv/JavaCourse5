@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class RaterFiltersImpl implements RaterFilters {
 
-    private ArrayList<Rater> ratersList;
+    private List<Rater> ratersList;
 
     public RaterFiltersImpl(ArrayList<Rater> ratersList) {
         this.ratersList = ratersList;

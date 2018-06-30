@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class MovieFiltersImpl implements MovieFilters {
 
-    private ArrayList<Movie> moviesList;
+    private List<Movie> moviesList;
 
     public MovieFiltersImpl(ArrayList<Movie> moviesList) {
         this.moviesList = moviesList;

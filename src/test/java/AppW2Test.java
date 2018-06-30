@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 public class AppW2Test {
     @Test
     public void testAppHasAGreeting() {
-        AppW2 classUnderTest = new AppW2();
+        AppW3 classUnderTest = new AppW3();
         assertNotNull("app should have a greeting",
                 classUnderTest.getGreeting());
     }
