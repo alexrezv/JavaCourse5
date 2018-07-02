@@ -6,7 +6,6 @@ import Week3.filters.Filter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public class MovieDatabase {
     //A private loadMovies method to build the HashMap.
     private static void loadMovies(String movieFile) {
         movieIdToMovieMap = FirstRatings.loadMovies(movieFile).stream().
-                collect(Collectors.toMap(Movie::getTitle, movie -> movie, (v1, v2) -> v2));
+                collect(Collectors.toMap(Movie::getId, movie -> movie, (v1, v2) -> v2));
     }
 
     //A containsID method with one String parameter named id. This method returns true if the id is a movie in the
@@ -92,9 +91,9 @@ public class MovieDatabase {
 
     //A filterBy method that has one Filter parameter named f. This method returns an ArrayList of type String of movie
     // IDs that match the filtering criteria.
-    public static List<String> filterIdsBy(Filter f) {
+    public static ArrayList<String> filterIdsBy(Filter f) {
         initialize();
-        List<String> matchedMovies = new ArrayList<>();
+        ArrayList<String> matchedMovies = new ArrayList<>();
         for (String id : movieIdToMovieMap.keySet()) {
             if (f.satisfies(id)) {
                 matchedMovies.add(id);

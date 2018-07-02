@@ -28,21 +28,23 @@ public class AllFilters implements Filter {
     // satisfies the criteria of all the filters in the filters ArrayList. Otherwise this method returns false.
     @Override
     public boolean satisfies(String movieId) {
+        int matcher = 0;
         for (Filter f : filters) {
             if (f.satisfies(movieId)) {
-                return true;
+                matcher++;
             }
         }
-        return false;
+        return matcher == filters.size();
     }
 
     @Override
     public boolean satisfies(Movie movie) {
+        int matcher = 0;
         for (Filter f : filters) {
             if (f.satisfies(movie)) {
-                return true;
+                matcher++;
             }
         }
-        return false;
+        return matcher == filters.size();
     }
 }

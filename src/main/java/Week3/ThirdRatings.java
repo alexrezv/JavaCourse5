@@ -7,6 +7,7 @@ import Week1.Rating;
 import Week1.filters.MovieFiltersImpl;
 import Week1.filters.RaterFiltersImpl;
 import Week2.MapUtil;
+import Week3.filters.Filter;
 import Week3.filters.impl.TrueFilter;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ThirdRatings {
         ArrayList<Rating> ratings = rFilters.getAverageRatings(minimalRaters);
         Map<String, Double> titleToAvg = ratings.stream()
                 .collect(Collectors.toMap(r -> mFilters.getTitleById(r.getItem()), Rating::getValue));
+        System.out.println("Number of movies: " + titleToAvg.size());
         MapUtil.sortByValue(titleToAvg).forEach((key, value) -> System.out.println(value + " \t" + key));
     }
 
@@ -62,8 +64,15 @@ public class ThirdRatings {
     // at least minimalRaters ratings and satisfies the filter criteria. This method will need to create the
     // ArrayList of type String of movie IDs from the MovieDatabase using the filterBy method before calculating
     // those averages.
-    public ArrayList<Rating> getAverageRatingsByFilter() {
+    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria) {
+        ArrayList<Rating> avgRatingForFiltered = new ArrayList<>();
 
-        return null;
+        ArrayList<String> movieIds = MovieDatabase.filterIdsBy(filterCriteria);
+
+        for (String movieId : movieIds) {
+            avgRatingForFiltered.add(new Rating(movieId, rFilters.getAverageRatingByMovieID(movieId, minimalRaters)));
+        }
+
+        return avgRatingForFiltered;
     }
 }
