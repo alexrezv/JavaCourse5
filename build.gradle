@@ -1,14 +1,3 @@
-buildscript {
-    ext.kotlin_version = '1.2.31'
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 plugins {
     id 'java'
     id 'net.ltgt.apt' version '0.10'
@@ -16,8 +5,6 @@ plugins {
 
 group 'Coursera'
 version '1.0-SNAPSHOT'
-
-apply plugin: 'kotlin'
 
 sourceCompatibility = 1.8
 
@@ -30,25 +17,15 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
     compileOnly 'org.projectlombok:lombok:1.18.0'
     apt "org.projectlombok:lombok:1.18.0"
 
     compile files('libs/courserajava.jar')
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName="AppW3"
+mainClassName="AppW4"
 
 dependencies {
     compile 'org.apache.commons:commons-csv:1.5'
